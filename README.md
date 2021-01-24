@@ -48,7 +48,7 @@ It will expose the following api:
 * Create a code submission
   * **URL**
     
-    `/submit`
+    `/api/v1/submission`
 
   * Method
 
@@ -80,6 +80,7 @@ It will expose the following api:
 
     ```javascript
     {
+      "submissionId": "12312dasd1",
       "hasError": false,
       "passedAll": true, 
       "results": [true, true, true, true, true, true, true],
@@ -102,7 +103,7 @@ It will expose the following api:
 * Retreive a code submission
   * **URL**
     
-    `api/v1//submit/{id}`
+    `api/v1//submission/{id}`
 
   * Method
 
@@ -118,6 +119,7 @@ It will expose the following api:
 
     ```javascript
     {
+      "submissionId": "12312dasd1",
       "hasError": false,
       "passedAll": true, 
       "results": [true, true, true, true, true, true, true],
@@ -142,7 +144,7 @@ It will expose the following api:
   
   * **URL**
     
-    `api/v1//execute`
+    `api/v1//execution`
 
   * Method
 
