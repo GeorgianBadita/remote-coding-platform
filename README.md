@@ -7,8 +7,8 @@
   - [Non-Goals](#non-goals)
   - [Services](#services)
     - [User service](#user-service)
-    - [Remote Coding Execution Service](#remote-coding-execution-service)
-    - [Questions Manager Service](#questions-manager-service)
+    - [Remote Code Execution Service](#remote-code-execution-service)
+    - [Platform Manager Service](#platform-manager-service)
     - [Content Testing Service](#content-testing-service)
   - [Design Options](#design-options)
   - [Use Case Diagam](#use-case-diagam)
@@ -41,7 +41,7 @@ decided to onboard on the journey of creating one myself. I also noticed that so
 List of services for the Remote Coding Platform.
 
 ### User service
-### Remote Coding Execution Service
+### Remote Code Execution Service
 This service will handle all code executions for the platorm. Its only purpose is to run a given piece of code in a Docker container and return
 the output of the execution.
 
@@ -53,7 +53,7 @@ may want to run fork bombs/infinite loops/malicious bash commands.
 
 The server will expose the following API:
 
-* Create a code evaluation - evaluate code
+* Create a code evaluation - The server will evaluate the code and return data about the code correctness
   * **URL**
     
     `/api/v1/evaluations`
@@ -73,14 +73,14 @@ The server will expose the following API:
     ```
   * Success Response
 
-    Code: 201 - CREATED
+    Code: 200 - OK
     Response Body:
 
     ```javascript
     {
-      "submissionId": "12312dasd1",
+      "submissionId": "some-uuid",
       "hasError": false, 
-      "results": [true, true, true, true, true, true, true],
+      "results": [true, true],
       "out_of_resources": false,
       "exitCode": 0,
       "out_of_time": false,
@@ -89,59 +89,43 @@ The server will expose the following API:
     ```
   * Error Response
 
-    Code: 401 - UNAUTHORIZED
+    Code: 400 - BAD REQUEST
     Response Body:
-     ```javascript
-    {
-      "error": "Not Authorized Entity"
-    }
-    ```
-
-* Retreive a code submission
-  * **URL**
-    
-    `api/v1//submission/{id}`
-
-  * Method
-
-    `GET`
-
-  * URL Params
-    `id=[string]`
-
-  * Success Response
-
-    Code: 200 - OK
-    Response Body:
-
     ```javascript
     {
-      "submissionId": "12312dasd1",
-      "hasError": false,
-      "passedAll": true, 
-      "results": [true, true, true, true, true, true, true],
-      "outOfResources": false,
-      "exitCode": 0,
-      "outOfTime": false,
-      "rawOutput": "----- Test Case 1 ---- ..."
+      "detail": "Invalid test code format"
     }
     ```
-  * Error Response
 
-    Code: 401 - UNAUTHORIZED
+    Code: 422 - VALIDATION ERROR
     Response Body:
-     ```javascript
+    ```javascript
     {
-      "error": "Not Authorized Entity"
+      "detail": [
+        {
+          "loc": [
+            "string"
+          ],
+          "msg": "string",
+          "type": "string"
+        }
+      ]
     }
     ```
 
+    Code: 500 - INTERNAL SERVER ERROR
+    Response Body:
+    ```javascript
+    {
+      "detail": "The server could not process the code execution"
+    }
+    ```
 
 * Create a simple code execution - given a piece of code return its output
   
   * **URL**
     
-    `api/v1//execution`
+    `api/v1//executions`
 
   * Method
 
@@ -152,35 +136,52 @@ The server will expose the following API:
     ```javascript
     {
       "language":"python",
-      "code": "def return_string(s):\n\treturn s",
+      "code": "print(\"Hello World\")",
+      "timeout": 2.1
     }
     ```
   * Success Response
 
-    Code: 201 - CREATED
+    Code: 200 - OK
     Response Body:
 
     ```javascript
     {
       "hasError": false,
-      "outOfResources": false,
-      "exitCode": 0,
-      "outOfTime": false,
-      "rawOutput": "----- Test Case 1 ---- ..."
+      "out_of_resources": false,
+      "exit_code": 0,
+      "out_of_time": false,
+      "raw_output": "Hello World\n"
     }
     ```
   * Error Response
 
-    Code: 401 - UNAUTHORIZED
+    Code: 422 - VALIDATION ERROR
     Response Body:
-     ```javascript
+    ```javascript
     {
-      "error": "Not Authorized Entity"
+      "detail": [
+        {
+          "loc": [
+            "string"
+          ],
+          "msg": "string",
+          "type": "string"
+        }
+      ]
+    }
+    ```
+
+    Code: 500 - INTERNAL SERVER ERROR
+    Response Body:
+    ```javascript
+    {
+      "detail": "The server could not process the code execution"
     }
     ```
 
 
-### Questions Manager Service 
+### Platform Manager Service 
 ### Content Testing Service
 
 ## Design Options
