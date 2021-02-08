@@ -45,7 +45,7 @@ List of services for the Remote Coding Platform.
 This service will handle all code executions for the platorm. Its only purpose is to run a given piece of code in a Docker container and return
 the output of the execution.
 
-It will consist of a server written using [FastAPI](https://fastapi.tiangolo.com/) and an worker which will use [Celey](https://docs.celeryproject.org/en/stable/getting-started/introduction.html).
+It will consist of a server written using [FastAPI](https://fastapi.tiangolo.com/) and an worker which will use [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html).
 
 The server will post code executions in a [RabbitMQ](https://www.rabbitmq.com/) task queue, and the worker will process each execution from the queue.
 This design decision was taken with security in mind, as running code, directly on the server can have significant impact in cases, where bad intended users
