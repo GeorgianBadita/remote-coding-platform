@@ -182,7 +182,7 @@ The server will expose the following API:
 
 
 ### Platform Manager Service 
-### Content Testing Service
+### Content Manager Service
 
 ## Design Options
 
