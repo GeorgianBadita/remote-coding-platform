@@ -38,6 +38,7 @@ decided to onboard on the journey of creating one myself. I also noticed that so
 2. No CDNs will be considered for now, I may think of using one in the future
 
 ## Services
+
 List of services for the Remote Coding Platform.
 
 ### User service
