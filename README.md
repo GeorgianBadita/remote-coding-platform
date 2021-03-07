@@ -12,10 +12,6 @@
     - [Platform Manager Service](#platform-manager-service)
       - [Stored Data and Accesibillity Patterns](#stored-data-and-accesibillity-patterns)
     - [Content Testing Service](#content-testing-service)
-  - [Design Options](#design-options)
-  - [Use Case Diagam](#use-case-diagam)
-  - [Option 1 - O1](#option-1---o1)
-  - [Option 2 - O2](#option-2---o2)
 
 ## Purpose
 
@@ -61,13 +57,10 @@ This service will manage the state of each user in the platform, (i.e.) the prob
 with its submissions on each problem.
 This service will also support a playground where a user can freely execute pieces of code against given inputs.
 
+A more detailed description of this service can be found [here](./remote-code-platform-manager-service.md)
+
 #### Stored Data and Accesibillity Patterns
 
 
 ### Content Testing Service
 
-## Design Options
-
-## Use Case Diagam
-## Option 1 - O1
-## Option 2 - O2
