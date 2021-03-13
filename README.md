@@ -39,7 +39,7 @@ decided to onboard on the journey of creating one myself. I also noticed that so
 
   The following diagram provides an idea of the high level arthitecture of the platform
 
-![architecture-diagram](https://i.ibb.co/7GSLx2D/Remote-Code-Execution-Engine.png)
+![architecture-diagram](https://i.ibb.co/YX3SSh3/Remote-Code-Execution-Platform.png)
 
 ## Services
 
